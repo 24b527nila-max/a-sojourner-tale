@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Sojourner Tale | A story inspired by NASA Mars Pathfinder</title>
+<style>
+:root{--bg:#160a08;--bg2:#2a130c;--ink:#f6e7d8;--mute:#cfae96;--acc:#ff7a3d;--acc2:#ffd27a;--card:rgba(255,255,255,.07);--line:rgba(255,200,160,.2);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#fff3e6;--bg2:#ffe0c7;--ink:#3a1a10;--mute:#7a4a36;--acc:#c2410c;--acc2:#a16207;--card:rgba(120,50,20,.07);--line:rgba(120,50,20,.2)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fff3e6;--bg2:#ffe0c7;--ink:#3a1a10;--mute:#7a4a36;--acc:#c2410c;--acc2:#a16207;--card:rgba(120,50,20,.07);--line:rgba(120,50,20,.2)}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--ink);font:1.1rem/1.7 Georgia,serif}
+h1,h2,h3,.tag,button,.fact,.stat{font-family:'Trebuchet MS',system-ui,sans-serif}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1.2rem 7rem;overflow:hidden;background:linear-gradient(#1b0f2e 0%,#7a2e1c 55%,#d9692f 78%)}
+.hero .dunes{position:absolute;left:0;right:0;bottom:0;width:100%;height:30%}
+.hero>*:not(.dunes){position:relative;z-index:1}
+.hero h1{font-size:clamp(2.4rem,9vw,5rem);margin:.3rem 0;color:#fff;text-shadow:0 3px 20px #0008}.hero h1 span{color:var(--acc2)}
+.hero p{max-width:34rem;color:#ffe9d6}
+.tag{color:var(--acc2);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase}
+.btn{background:var(--acc2);color:#2a130c;border:0;border-radius:99px;padding:.7rem 1.4rem;font-weight:700;font-size:1rem;cursor:pointer;margin:.3rem}
+.btn.g{background:rgba(0,0,0,.35);color:#fff;border:1px solid #fff5}
+.stage{position:relative;width:min(340px,84vw);animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.stage svg{width:100%;display:block}
+.hs{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:2px solid var(--acc2);background:rgba(255,122,61,.45);color:#fff;font-weight:700;cursor:pointer;padding:0;animation:pl 2s infinite}
+@keyframes pl{to{box-shadow:0 0 0 14px #ffd27a00}}.hs{box-shadow:0 0 0 0 #ffd27ab3}
+.hint{font:.8rem system-ui;color:#ffe9d6}
+.ch{max-width:44rem;margin:0 auto;padding:3.5rem 1.3rem;opacity:0;transform:translateY(26px);transition:.8s}.ch.in{opacity:1;transform:none}
+.scene{border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-bottom:1rem;background:#000}
+.scene svg{display:block;width:100%}
+.ch h2{font-size:clamp(1.6rem,5vw,2.3rem);margin:.2rem 0 .8rem}.ch p{margin:0 0 1rem}
+.fact{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:10px;padding:.8rem 1rem;font-size:.95rem;line-height:1.5;color:var(--mute)}.fact b{color:var(--acc2)}
+.more{background:transparent;color:var(--acc2);border:1px solid var(--acc2);border-radius:99px;padding:.4rem 1rem;cursor:pointer;font-size:.9rem;margin-top:.6rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.7rem;margin:1rem 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem;text-align:center}.stat big{display:block;font-size:1.7rem;color:var(--acc);font-weight:700}.stat small{color:var(--mute)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.7rem;margin-top:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem;color:var(--ink);font-weight:600;text-align:left;cursor:pointer}.card span{display:block;font-weight:400;font-size:.82rem;color:var(--mute)}.card:hover{border-color:var(--acc)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem;margin:.8rem 0}.q p{font:600 1rem system-ui;margin:0 0 .6rem}
+.q button{display:block;width:100%;text-align:left;margin:.3rem 0;padding:.55rem .8rem;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font-size:.95rem}
+.q button.ok{background:#16a34a55;border-color:#16a34a}.q button.no{background:#dc262655;border-color:#dc2626}
+.ov{position:fixed;inset:0;z-index:20;background:#000a;display:none;align-items:center;justify-content:center;padding:1rem}.ov.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--acc);border-radius:16px;max-width:30rem;width:100%;max-height:85vh;overflow:auto;padding:1.4rem;position:relative;animation:pop .25s}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+.modal h3{margin:.2rem 2rem .6rem 0;color:var(--acc2)}.modal p,.modal li{font-size:1rem;line-height:1.6}.modal ul{padding-left:1.2rem}
+.src{font:.75rem system-ui;color:var(--mute)}
+.x{position:absolute;top:.6rem;right:.6rem;background:var(--card);border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer}
+.end{text-align:center;padding:3rem 1.3rem 6rem;color:var(--mute);font:.9rem system-ui}
+.track{position:fixed;left:0;right:0;bottom:0;height:calc(34px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:5}
+.track hr{position:absolute;left:3%;right:3%;bottom:calc(10px + env(safe-area-inset-bottom,0px));border:0;border-top:2px dashed var(--line);margin:0}
+.track i{position:absolute;bottom:calc(8px + env(safe-area-inset-bottom,0px));font-style:normal;font-size:20px;transition:left .15s}
+.stars{position:fixed;inset:0;z-index:-1;opacity:.45}
+</style></head><body>
+<canvas class="stars" id="stars"></canvas>
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a1d3f"/><stop offset=".6" stop-color="#c2582b"/><stop offset="1" stop-color="#e99a58"/></linearGradient>
+<symbol id="rv" viewBox="0 0 320 170">
+<rect x="70" y="40" width="180" height="22" rx="4" fill="#2c4a8a" stroke="#ffd27a" stroke-width="2"/><path d="M115 40v22M160 40v22M205 40v22M70 51h180" stroke="#17306b" stroke-width="1.5"/>
+<rect x="88" y="62" width="144" height="46" rx="8" fill="#d9c7a8" stroke="#8a6d4b" stroke-width="2"/>
+<circle cx="236" cy="84" r="6" fill="#222"/><circle cx="236" cy="84" r="2.5" fill="#ffd27a"/>
+<path d="M232 108l22 18M100 108L72 134M160 108v26M220 108l30 26" stroke="#8a6d4b" stroke-width="5"/>
+<g fill="#111" stroke="#bbb" stroke-width="2"><circle cx="66" cy="136" r="20"/><circle cx="160" cy="136" r="20"/><circle cx="254" cy="136" r="20"/></g><g fill="#888"><circle cx="66" cy="136" r="6"/><circle cx="160" cy="136" r="6"/><circle cx="254" cy="136" r="6"/></g></symbol></defs></svg>
+
+<section class="hero">
+<svg class="dunes" viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 40Q80 10 160 38T320 30T400 40V100H0Z" fill="#8f3b1f"/><path d="M0 65Q100 40 200 62T400 58V100H0Z" fill="#6e2a16"/><path d="M0 85Q120 70 240 84T400 80V100H0Z" fill="#4d1c0e"/></svg>
+<div class="stage"><svg viewBox="0 0 320 170" role="img" aria-label="Sojourner rover"><use href="#rv" width="320" height="170"/></svg>
+<button class="hs" style="left:50%;top:26%" data-pop="panel" aria-label="Solar panel">1</button>
+<button class="hs" style="left:74%;top:49%" data-pop="camera" aria-label="Cameras">2</button>
+<button class="hs" style="left:77%;top:73%" data-pop="apxs" aria-label="APXS">3</button>
+<button class="hs" style="left:50%;top:80%" data-pop="wheels" aria-label="Wheels">4</button>
+<button class="hs" style="left:32%;top:52%" data-pop="body" aria-label="Rover body">5</button></div>
+<div class="hint">Tap the glowing dots to explore the rover</div>
+<div class="tag">A story inspired by NASA data</div>
+<h1>A <span>Sojourner</span> Tale</h1>
+<p>I am a little rover with six wheels and a big job. Ride along while I tell you how I traveled to Mars, and what I found there.</p>
+<div><button class="btn" id="go">Begin the journey ↓</button><button class="btn g" id="narrate">🔊 Read aloud: off</button></div>
+</section>
+<div id="chs"></div>
+
+<section class="ch"><div class="tag">Mission files</div><h2>Open the NASA data</h2><p>Tap a card to see facts from NASA’s Mars Pathfinder mission page.</p>
+<div class="cards" id="cards"></div></section>
+<section class="ch" style="text-align:center"><div class="tag">The end</div><h2>Thank you 🚀</h2><p>Thank you for riding along with Sojourner. Keep looking up, and keep exploring.</p></section>
+
+<div class="ov" id="ov"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><button class="x" id="mx" aria-label="Close">✕</button><h3 id="mt"></h3><div id="mb"></div><div class="src">Source: NASA Science, Mars Pathfinder (science.nasa.gov/mission/mars-pathfinder)</div></div></div>
+<div class="end">Made with love for curious explorers. Facts are based on NASA’s Mars Pathfinder mission page.</div>
+<div class="track"><hr><i id="rv2">🚙</i></div>
+
+<script>
+(function(){
+var P={
+panel:['Solar power','<p>I am solar-powered, so I work in daylight and rest at night. (General mission knowledge, not from the NASA page.)</p>'],
+camera:['Cameras','<p>Three cameras gave images of the terrain for geology and documented how the mission’s new technologies performed.</p><p>The rover returned 550 images and the lander more than 16,500.</p>'],
+apxs:['Alpha Proton X-ray Spectrometer','<p>This instrument determined the elemental composition of rocks and soils. I pressed it against rocks to learn what they were made of.</p>'],
+wheels:['Rolling down the ramp','<p>On Sol 2, Sojourner stood to its full height of 1 foot (30 cm) and rolled down the lander’s rear ramp, tilted 20 degrees from the surface, well within safe limits.</p>'],
+body:['Sojourner Rover','<p>The 23-pound (10.6 kg) rover was named after civil-rights crusader Sojourner Truth. Rover and lander both carried science instruments and tested new technologies.</p>'],
+key:['Key facts','<ul><li><b>Launch:</b> Dec. 4, 1996, Cape Canaveral, Florida</li><li><b>Rocket:</b> Delta II 7925</li><li><b>Landing:</b> July 4, 1997, Ares Vallis</li><li><b>End of mission:</b> Sept. 27, 1997</li></ul>'],
+air:['Airbag landing','<p>Pathfinder entered the atmosphere directly, slowed by a parachute and cushioned by giant airbags, the first time this was done.</p><ul><li>Impact speed: 31 mph (14 m/s)</li><li>Airbags inflated about 330 ft (100 m) up</li><li>About 15 bounces, up to 50 ft (15 m) high</li><li>Stopped after 2½ minutes, about 1 km away</li></ul>'],
+ares:['Ares Vallis','<p>An ancient flood plain in Mars’ northern hemisphere and among its rockiest places, chosen for the wide variety of rocks a catastrophic flood left behind.</p><p>Scientists believe water the size of the Great Lakes cut it in about two weeks.</p>'],
+inst:['Science instruments','<ul><li><b>Alpha Proton X-ray Spectrometer:</b> elements in rocks and soil</li><li><b>Three cameras:</b> terrain and technology images</li><li><b>Atmospheric Structure Instrument / Meteorology Package:</b> atmosphere on descent, weather at the lander</li></ul>'],
+sci:['Science highlights','<ul><li>Rounded pebbles suggest running water in a warmer past.</li><li>Radio tracking helped measure Mars’ core radius (over 800 miles, under about 1,250 miles).</li><li>Airborne dust is magnetic, likely maghemite.</li><li>Dust devils were seen and measured.</li><li>Early-morning water ice clouds were seen.</li></ul>'],
+data:['Data returned','<p>By Sept. 27, 1997, Pathfinder returned <b>2.3 billion bits</b>: more than 16,500 lander images, 550 rover images, 15+ chemical analyses of rocks and soil, and weather data.</p><p>Findings suggest Mars was once warm and wet.</p>']};
+var G='<rect width="400" height="180" fill="url(#sky)"/>',F='<path d="M0 140Q100 120 200 135T400 130V180H0Z" fill="#8f3b1f"/><path d="M0 160Q150 145 400 158V180H0Z" fill="#6e2a16"/>',R=function(x,y,w){return '<use href="#rv" x="'+x+'" y="'+y+'" width="'+w+'" height="'+w*.53+'"/>'},T=function(x,y,t,s){return '<text x="'+x+'" y="'+y+'" fill="#f6e7d8" font-size="'+(s||11)+'" font-family="sans-serif" text-anchor="middle">'+t+'</text>'};
+var rocks=[[70,128,'Barnacle Bill'],[200,134,'Yogi'],[320,126,'Scooby-Doo']].map(function(r){return '<ellipse cx="'+r[0]+'" cy="'+r[1]+'" rx="26" ry="14" fill="#5b2a18" stroke="#3a1a10"/>'+T(r[0],r[1]-20,r[2])}).join('');
+var rv=[['Sojourner',5],['Spirit',8],['Opportunity',9],['Curiosity',13],['Perseverance',14]].map(function(r,i){return '<circle cx="'+(45+i*78)+'" cy="'+(130-r[1])+'" r="'+r[1]+'" fill="'+(i?'#d9c7a8':'#ffd27a')+'"/>'+T(45+i*78,160,r[0],9)}).join('');
+var S=[
+G+F+'<circle cx="330" cy="40" r="12" fill="#ffe9b0"/>'+R(140,70,120)+T(200,25,'Hello from Mars!',14),
+'<rect width="400" height="180" fill="#0b0618"/><circle cx="60" cy="100" r="24" fill="#3b82f6"/><circle cx="340" cy="90" r="14" fill="#d9541e"/><path id="p" d="M60 100Q200 10 340 90" fill="none" stroke="#fff6" stroke-dasharray="4 4"/><circle r="5" fill="#ffd27a"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#p"/></animateMotion></circle>'+T(60,142,'Earth')+T(340,126,'Mars')+T(200,170,'About 7 months in space',12),
+G+F+'<path d="M160 50A40 40 0 0 1 240 50Z" fill="#fff"/><path d="M160 50L190 95M240 50L210 95M200 50v45" stroke="#fff" opacity=".7"/><g><circle cx="200" cy="105" r="24" fill="#f0e6d8" stroke="#999"/><animateTransform attributeName="transform" type="translate" values="0 -30;0 8;0 -18;0 8;0 -6;0 8" dur="4s" repeatCount="indefinite"/></g>'+T(200,25,'Bounce, bounce, bounce!',14),
+G+F+'<path d="M30 140V86l70-24v78Z" fill="#c9c9d0" stroke="#888"/><path d="M100 104L180 140H100Z" fill="#aaa"/>'+T(65,80,'Lander',11)+'<g>'+R(110,78,90)+'<animateTransform attributeName="transform" type="translate" values="0 0;80 20" dur="5s" repeatCount="indefinite"/></g>',
+G+F+rocks+R(120,95,60)+'<rect x="165" y="124" width="30" height="3" fill="#ffd27a"/>',
+'<rect width="400" height="180" fill="#2a130c"/><g transform="translate(200 70)"><circle r="26" fill="#ffd27a"/><g stroke="#ffd27a" stroke-width="3"><path d="M0-40v-12M0 40v12M-40 0h-12M40 0h12M28-28l8-8M-28 28l-8 8M28 28l8 8M-28-28l-8-8"/></g><animateTransform attributeName="transform" type="rotate" values="0;360" dur="20s" repeatCount="indefinite" additive="sum"/></g>'+F+R(150,100,100),
+'<rect width="400" height="180" fill="#1a0d0a"/><rect x="20" y="40" width="28" height="26" rx="4" fill="#94a3b8"/><rect x="20" y="100" width="0" height="26" rx="4" fill="#ff7a3d"><animate attributeName="width" from="0" to="340" dur="3s" fill="freeze"/></rect>'+T(34,34,'7 sols planned',11)+T(130,94,'83 sols worked',12),
+G+F+rv+T(200,25,'Spirit, Opportunity, Curiosity, Perseverance',11)];
+var C=[['Hello','My name is Sojourner','A sojourner is a traveler who stays somewhere for a little while. I was named for Sojourner Truth, who traveled across America speaking up for people’s rights. A 12-year-old girl, Valerie Ambroise, wrote the essay that gave me my name.<br><br>I weigh about 10.6 kilograms (23 pounds). Nobody had ever driven a rover on Mars before me.','body','<div class="stats"><div class="stat"><big>10.6 kg</big><small>my weight</small></div><div class="stat"><big>6</big><small>wheels</small></div><div class="stat"><big>30 cm</big><small>tall</small></div></div>'],
+['Launch','Folded inside a lander','On December 4, 1996, a Delta II rocket lifted Mars Pathfinder from Cape Canaveral, Florida. I rode inside the lander, folded up like a tiny suitcase, for about seven months.','key',''],
+['Landing','Bounce, bounce, bounce!','On July 4, 1997, a parachute slowed us, and giant airbags puffed up around the lander. We bounced about 15 times, as high as 15 metres, like a giant beach ball, and stopped 2½ minutes later.','air',''],
+['First steps','Rolling onto Mars','Late on the night of July 5, my second Martian day (Sol 2), I stood up to my full height and rolled down the ramp. The lander, called the Carl Sagan Memorial Station, watched me go.','wheels',''],
+['Rocks','Rocks with funny names','Scientists nicknamed nearby rocks Barnacle Bill, Yogi and Scooby-Doo. I pressed my APXS instrument against them to measure which elements they held.','inst','<div class="fact"><b>Landing site:</b> Ares Vallis, an ancient flood plain and one of the rockiest places on Mars.</div>'],
+['Sunlight','My power comes from the Sun','A solar panel gives me energy to drive, think and talk to the lander. At night it is bitterly cold, so I rest until morning.','panel',''],
+['Longer than planned','A week became almost three months','My builders planned for 7 sols. I worked for 83. The last data from Pathfinder reached Earth on September 27, 1997, and we had sent back 2.3 billion bits of information.','data',''],
+['Legacy','Footprints for my big siblings','I showed that a rover could roll and do science on Mars. Then came Spirit, Opportunity, Curiosity and Perseverance. NASA’s data suggest Mars was once warm and wet, and our tiny team helped show it.','sci','<div class="fact"><b>Your turn:</b> If you could name a rover, what would you call it?</div>']];
+var h='';C.forEach(function(c,i){h+='<section class="ch"><div class="scene"><svg viewBox="0 0 400 180">'+S[i]+'</svg></div><div class="tag">Chapter '+(i+1)+' · '+c[0]+'</div><h2>'+c[1]+'</h2><p>'+c[2]+'</p>'+c[4]+'<button class="more" data-pop="'+c[3]+'">Open NASA data</button></section>'});
+document.getElementById('chs').innerHTML=h;
+document.getElementById('cards').innerHTML=['key','air','ares','inst','sci','data'].map(function(k){return '<button class="card" data-pop="'+k+'">'+P[k][0]+'<span>Tap to open</span></button>'}).join('');
+var ov=document.getElementById('ov'),last;
+function op(k,el){last=el;document.getElementById('mt').textContent=P[k][0];document.getElementById('mb').innerHTML=P[k][1];ov.classList.add('show');document.getElementById('mx').focus()}
+function cl(){ov.classList.remove('show');if(last)last.focus()}
+document.querySelectorAll('[data-pop]').forEach(function(b){b.onclick=function(){op(b.dataset.pop,b)}});
+document.getElementById('mx').onclick=cl;ov.onclick=function(e){if(e.target===ov)cl()};addEventListener('keydown',function(e){if(e.key==='Escape')cl()});
+document.getElementById('go').onclick=function(){document.querySelector('.ch').scrollIntoView()};
+var r2=document.getElementById('rv2');function pr(){var h=document.documentElement.scrollHeight-innerHeight;r2.style.left=(3+(h>0?scrollY/h:0)*88)+'%'}addEventListener('scroll',pr,{passive:true});pr();
+var on=false,nb=document.getElementById('narrate');function sp(el){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(el.querySelector('h2').innerText+'. '+el.querySelector('p').innerText);u.rate=.95;speechSynthesis.speak(u)}catch(e){}}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');if(on&&e.target.querySelector('h2')&&e.target.querySelector('.scene'))sp(e.target)}})},{threshold:.35});document.querySelectorAll('.ch').forEach(function(c){io.observe(c)});
+nb.onclick=function(){on=!on;nb.textContent='🔊 Read aloud: '+(on?'on':'off');if(!on){try{speechSynthesis.cancel()}catch(e){}}};
+var cv=document.getElementById('stars'),x=cv.getContext('2d'),A=[];function rs(){cv.width=innerWidth;cv.height=innerHeight;A=[];for(var i=0;i<90;i++)A.push([Math.random()*cv.width,Math.random()*cv.height,Math.random()*1.4+.3])}rs();addEventListener('resize',rs);
+(function t(n){x.clearRect(0,0,cv.width,cv.height);x.fillStyle='#fff';A.forEach(function(s,i){x.globalAlpha=.4+.5*Math.abs(Math.sin(n/1200+i));x.beginPath();x.arc(s[0],s[1],s[2],0,7);x.fill()});requestAnimationFrame(t)})(0);
+})();
+</script></body></html>
